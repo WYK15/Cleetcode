@@ -20,6 +20,7 @@ public:
         return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
     }
 
+    //647
     int countSubstrings(string s) {
         int len = s.length();
         bool dp[len][len];
