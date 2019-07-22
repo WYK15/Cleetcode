@@ -34,10 +34,36 @@ public:
         }
         return result;
     }
+
+    //868
+    int binaryGap(int N) {
+        if (!N)
+            return 0;
+        int last = 0,result = 0;
+        while (N != 0) {
+            if ( N & 1 == 1) {
+                N >>= 1;
+                break;
+            } else{
+                last++;
+            }
+            N >>= 1;
+        }
+        int index = last+1;
+        while (N != 0) {
+            if (N & 1 == 1) {
+                result = max(result,index - last);
+                last = index;
+            }
+            index++;
+            N >>= 1;
+        }
+        return result;
+    }
 };
 
 
 int main(){
-    cout<<Solution().countSubstrings("aaaaa");
+    cout<<Solution().binaryGap(5);
     return 0;
 }
