@@ -10,6 +10,12 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+struct ListNode {
+        int val;
+         ListNode *next;
+         ListNode(int x) : val(x), next(NULL) {}
+     };
+
 class Solution {
 public:
     // 100 simple
@@ -60,6 +66,38 @@ public:
         }
         return result;
     }
+
+    //147对链表进行插入排序
+    ListNode* insertionSortList(ListNode* head) {
+        if(!head) return head;
+        ListNode *sortlast = head;
+        ListNode *tmp ,*first = head;
+        while(tmp = sortlast->next) {
+            if (tmp->val >= sortlast->val){
+                sortlast = tmp;
+                continue;
+            }
+            if (tmp->val <= first->val) {
+                sortlast->next = tmp->next;
+                tmp->next = first;
+                first = tmp;
+                continue;
+            }
+            ListNode *iter = first;
+            while (iter != sortlast) {
+                if (tmp->val >= iter->val && tmp->val < iter->next->val){
+                    sortlast->next = tmp->next;
+                    tmp->next = iter->next;
+                    iter->next = tmp;
+                    break;
+                }
+                iter = iter->next;
+            }
+        }
+        return first;
+    }
+
+
 };
 
 
